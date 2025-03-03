@@ -82,7 +82,7 @@
   <div class="flex flex-row gap-2 px-2">
     <Input
       id="ww-size"
-      label="Wielkość"
+      label="Rozmiar"
       type="number"
       step="1"
       containerClass="flex-1"
