@@ -1,6 +1,6 @@
 <script lang="ts">
+  import IconFountain from "$lib/IconFountain.svelte";
   import "../app.css";
-  import { IconFountain } from "@tabler/icons-svelte";
 
   let { children } = $props();
 </script>

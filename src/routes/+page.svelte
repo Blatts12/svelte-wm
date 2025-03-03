@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { IconX } from "@tabler/icons-svelte";
   import { AppConfig, appConfig } from "$lib/AppConfig.svelte";
   import WM from "@be-tech/watermarkjs";
   import Button from "$lib/Button.svelte";
   import Card from "$lib/Card.svelte";
   import FileInput from "$lib/FileInput.svelte";
   import Input from "$lib/Input.svelte";
+  import IconX from "$lib/IconX.svelte";
 
   const processFunction = async (file: File, width: number, height: number, config: AppConfig) => {
     const { watermarkText, textColor, textSize, x: ogX, y: ogY, textOpacity } = config;
@@ -142,7 +142,7 @@
               title="Usuń"
               onclick={(_e) => appConfig.removeSelectedFile(uuid)}
             >
-              <IconX size="24" />
+              <IconX size={24} />
             </button>
           </div>
           <img
@@ -172,7 +172,7 @@
           title="Usuń"
           onclick={(_e) => appConfig.removeProcessedImage(uuid)}
         >
-          <IconX size="24" />
+          <IconX size={24} />
         </button>
       </div>
 
