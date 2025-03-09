@@ -1,11 +1,11 @@
 <script lang="ts">
   import { AppConfig, appConfig } from "$lib/AppConfig.svelte";
-  import WM from "@be-tech/watermarkjs";
   import Button from "$lib/Button.svelte";
   import Card from "$lib/Card.svelte";
   import FileInput from "$lib/FileInput.svelte";
   import Input from "$lib/Input.svelte";
   import IconX from "$lib/IconX.svelte";
+  import WM from "$lib/Watermark/index";
 
   const processFunction = async (file: File, width: number, height: number, config: AppConfig) => {
     const { watermarkText, textColor, textSize, x: ogX, y: ogY, textOpacity } = config;
