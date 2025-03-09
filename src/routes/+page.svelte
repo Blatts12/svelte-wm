@@ -6,6 +6,7 @@
   import Input from "$lib/Input.svelte";
   import IconX from "$lib/IconX.svelte";
   import WM from "$lib/Watermark/index";
+  import { fade } from "svelte/transition";
 
   const processFunction = async (file: File, width: number, height: number, config: AppConfig) => {
     const { watermarkText, textColor, textSize, x: ogX, y: ogY, textOpacity } = config;
@@ -34,7 +35,7 @@
   };
 </script>
 
-<Card header="Konfiguracja znaku wodnego">
+<Card header="Konfiguracja znaku wodnego" class="container mx-auto">
   <Input
     id="ww-name"
     label="Nazwa"
@@ -111,7 +112,7 @@
   </p>
 </Card>
 
-<Card header="Wybierz zdjęcia">
+<Card header="Wybierz zdjęcia" class="container mx-auto">
   <FileInput
     id="ww-files"
     multiple
@@ -124,8 +125,8 @@
     <h3 class="mt-1 font-semibold">Wybrane</h3>
 
     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-      {#each Object.entries(appConfig.selectedFiles) as [uuid, file]}
-        <Card>
+      {#each Object.entries(appConfig.selectedFiles) as [uuid, file] (uuid)}
+        <Card animated>
           <div class="flex flex-row justify-between gap-2">
             <h4>{file.name}</h4>
             {#if appConfig.processingImages[uuid]}
@@ -160,9 +161,9 @@
   {/if}
 </Card>
 
-<Card header="Pobierz zdjęcia">
-  {#each Object.entries(appConfig.processedImages) as [uuid, image]}
-    <Card>
+<Card header="Pobierz zdjęcia" class="container mx-auto">
+  {#each Object.entries(appConfig.processedImages) as [uuid, image] (uuid)}
+    <Card animated>
       <div class="flex flex-row justify-between gap-2">
         <h4>{appConfig.selectedFiles[uuid].name}</h4>
 
