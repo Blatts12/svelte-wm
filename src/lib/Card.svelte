@@ -19,8 +19,8 @@
     "bg-white-app border-black-app shadow-nb-md mb-4 flex flex-col gap-2 rounded-lg border-2 p-2",
     className
   )}
-  in:fade={{ duration: animated ? 250 : 0 }}
-  out:fade={{ duration: animated ? 250 : 0 }}
+  in:fade|global={{ duration: animated ? 250 : 0 }}
+  out:fade|global={{ duration: animated ? 250 : 0 }}
 >
   {#if header}
     <h2 class="text-xl font-bold">{header}</h2>
