@@ -105,7 +105,7 @@
   </div>
 
   <p
-    class="example text-center drop-shadow-[0_2px_2px_rgba(0,0,0)]"
+    class="example text-center drop-shadow-[0_2px_2px_rgba(0,0,0)] transition-all"
     style={`color:${appConfig.textColor};font-size:${Math.max(Math.min(80, appConfig.textSize), 20)}px;opacity:${appConfig.textOpacity}%`}
   >
     {appConfig.watermarkText}
@@ -134,7 +134,7 @@
             {/if}
 
             {#if appConfig.errorProcessingImages[uuid]}
-              <p>Błąd</p>
+              <p class="text-error-600">Błąd</p>
             {/if}
 
             <button
