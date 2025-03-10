@@ -13,6 +13,7 @@ export class AppConfig {
   textColor = $state("#FFFFFF");
   textSize = $state(20);
   textOpacity = $state(90);
+  rotation = $state(0);
   selectedFiles = $state<{ [key in UUID]: File }>({});
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   processedImages = $state<{ [key in UUID]: any }>({});

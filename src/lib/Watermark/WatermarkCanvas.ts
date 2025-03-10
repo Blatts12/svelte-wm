@@ -46,6 +46,7 @@ export interface WatermarkImage {
 }
 
 export interface WatermarkTextStyle {
+  rotation?: number;
   weight?: string | number;
   family?: string;
   color?: CanvasFillStrokeStyles["fillStyle"];
@@ -71,6 +72,7 @@ export class WatermarkCanvas {
     this.context = this.canvas.getContext("2d")!;
 
     const _textStyle = {
+      rotation: textStyle?.rotation || 0,
       weight: textStyle?.weight || "bold",
       family: textStyle?.family || "serif",
       size: textStyle?.size || "24px",
@@ -119,7 +121,18 @@ export class WatermarkCanvas {
   }
 
   public drawWatermarkText(text: string, coordX: number, coordY: number) {
-    this.context.fillText(text, coordX, coordY);
+    if (this.textStyle.rotation) {
+      this.context.save();
+      this.context.textAlign = "center";
+      this.context.textBaseline = "bottom";
+      this.context.translate(coordX, coordY);
+      this.context.rotate((this.textStyle.rotation * Math.PI) / 180);
+      this.context.fillText(text, 0, 0);
+      this.context.restore();
+    } else {
+      this.context.fillText(text, coordX, coordY);
+    }
+
     return this;
   }
 

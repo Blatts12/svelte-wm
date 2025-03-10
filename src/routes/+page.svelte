@@ -6,10 +6,9 @@
   import Input from "$lib/Input.svelte";
   import IconX from "$lib/IconX.svelte";
   import WM from "$lib/Watermark/index";
-  import { fade } from "svelte/transition";
 
   const processFunction = async (file: File, width: number, height: number, config: AppConfig) => {
-    const { watermarkText, textColor, textSize, x: ogX, y: ogY, textOpacity } = config;
+    const { watermarkText, textColor, textSize, x: ogX, y: ogY, textOpacity, rotation } = config;
 
     const pointX = width * ogX;
     const pointY = height * ogY;
@@ -28,6 +27,7 @@
         family: "Architects Daughter",
         color: `${textColor}${opacity}`,
         weight: 400,
+        rotation,
       },
     });
 
@@ -70,15 +70,30 @@
     />
   </div>
 
-  <Input
-    id="ww-color"
-    label="Kolor"
-    type="color"
-    class="cursor-pointer"
-    containerClass="px-2"
-    value={appConfig.textColor}
-    onchange={(e) => (appConfig.textColor = (e.target as HTMLInputElement)?.value)}
-  />
+  <div class="flex flex-row gap-2 px-2">
+    <Input
+      id="ww-color"
+      label="Kolor"
+      type="color"
+      class="cursor-pointer"
+      containerClass="flex-1"
+      value={appConfig.textColor}
+      onchange={(e) => (appConfig.textColor = (e.target as HTMLInputElement)?.value)}
+    />
+    <Input
+      id="ww-opacity"
+      label="Rotacja"
+      type="range"
+      min="0"
+      max="360"
+      class="cursor-pointer shadow-none focus:shadow-none"
+      containerClass="flex-1"
+      value={appConfig.rotation}
+      oninput={(e) => (appConfig.rotation = parseInt((e.target as HTMLInputElement)?.value))}
+    >
+      <p class="text-right">{appConfig.rotation} stopni</p>
+    </Input>
+  </div>
 
   <div class="flex flex-row gap-2 px-2">
     <Input
@@ -98,7 +113,7 @@
       class="cursor-pointer shadow-none focus:shadow-none"
       containerClass="flex-1"
       value={appConfig.textOpacity}
-      onchange={(e) => (appConfig.textOpacity = parseFloat((e.target as HTMLInputElement)?.value))}
+      oninput={(e) => (appConfig.textOpacity = parseFloat((e.target as HTMLInputElement)?.value))}
     >
       <p class="text-right">{appConfig.textOpacity}%</p>
     </Input>
@@ -106,7 +121,7 @@
 
   <p
     class="example text-center drop-shadow-[0_2px_2px_rgba(0,0,0)] transition-all"
-    style={`color:${appConfig.textColor};font-size:${Math.max(Math.min(80, appConfig.textSize), 20)}px;opacity:${appConfig.textOpacity}%`}
+    style={`color:${appConfig.textColor};font-size:${Math.max(Math.min(80, appConfig.textSize), 20)}px;opacity:${appConfig.textOpacity}%;`}
   >
     {appConfig.watermarkText}
   </p>
